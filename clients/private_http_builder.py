@@ -7,13 +7,10 @@ from clients.authentication_client import get_authentication_client, LoginReques
 class AuthenticationUserDict(TypedDict):
     email: str
     password: str
-
-
 def get_private_http_client(user: AuthenticationUserDict) -> Client:
     authentication_client = get_authentication_client()
     login_request = LoginRequest(email=user['email'], password=user['password'])
     login_response = authentication_client.login(login_request)
-
     return Client(
         timeout=10,
         base_url="http://localhost:8000",
